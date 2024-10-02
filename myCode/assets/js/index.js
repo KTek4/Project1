@@ -1,57 +1,54 @@
 const searchItems = [
-    { name: 'robin hood'},
-    { name: 'harry potter'},
-    { name: 'narnia'},
-    { name: 'bluey'},
-    { name: 'percy jackson'},
-    { name: 'the hunger games'},
+    { name: "robin hood"},
+    { name: "harry potter"},
+    { name: "narnia"},
+    { name: "bluey"},
+    { name: "percy jackson"},
+    { name: "the hunger games"},
 ];
-
-tempEl.addEventListener("event type", () => {
-    
-})
 
 const searchInput = document.querySelector('.input');
 
-searchInput.addEventListener("input", (event) => {
-    let value = event.target.value;
+searchInput.addEventListener("input", (e) => {
+    e.preventDefault();
+    let value = e.target.value;
 
     if ( value.trim() ) {
 
-        renderList(searchItems.filter(book => {
-            return book.name.includes(value);
-        }))
+        renderList(searchItems.filter(book => {return book.name.includes(value)}
+        ))
     } else {
-        clearList();
+        //clearList();
     }
 })
 
-const searchButton = document.getElementById('search');
 const clearButton = document.getElementById('clear');
 
-clearButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    clearList();
+clearButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    //clearList();
 })
 
+//exercise 15 in webAPIs
 function renderList(results){
     for(const book of results){
         const resultItem = document.createElement('li');
-        resultItem.classList.add('result-item');
+        resultItem.classList.add('result-list');
 
         const text = document.createTextNode(book.name);
-        resultItem.appendChild(text);
-        renderList.appendChild(resultItem);
+        resultItem.append(text);
+        list.append(resultItem);
     }
-    if (results.length === 0) {
-        noResults();
-    }
+    //if (results.length === 0) {
+    //    noResults();
+    //}
 }
 
-function clearList() {
-    list.innerHTML = " ";
-}
+//function clearList() {
+    //list.innerHTML = " ";
+//}
 
+/*
 function noResults () {
     const error = document.createElement(li);
     error.classList.add('error-message');
@@ -60,3 +57,4 @@ function noResults () {
     error.append(text);
     list.append(error);
 }
+*/
