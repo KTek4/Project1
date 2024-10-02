@@ -1,62 +1,78 @@
 const searchItems = [
-    { name: 'robin hood'},
-    { name: 'harry potter'},
-    { name: 'narnia'},
-    { name: 'bluey'},
-    { name: 'percy jackson'},
-    { name: 'the hunger games'},
+  { name: 'robin hood' },
+  { name: 'harry potter' },
+  { name: 'narnia' },
+  { name: 'bluey' },
+  { name: 'percy jackson' },
+  { name: 'the hunger games' },
 ];
 
-tempEl.addEventListener("event type", () => {
-    
-})
-
+const list = document.getElementById('list');
 const searchInput = document.querySelector('.input');
-
-searchInput.addEventListener("input", (event) => {
-    let value = event.target.value;
-
-    if ( value.trim() ) {
-
-        renderList(searchItems.filter(book => {
-            return book.name.includes(value);
-        }))
-    } else {
-        clearList();
-    }
-})
-
-const searchButton = document.getElementById('search');
+const searchButton = document.getElementById('searchButton');
 const clearButton = document.getElementById('clear');
 
-clearButton.addEventListener("click", function (event) {
-    event.preventDefault();
+// Handle search input directly (typing)
+searchInput.addEventListener("input", (event) => {
+  let value = event.target.value;
+
+  if (value.trim()) {
+    renderList(searchItems.filter(book => {
+      return book.name.toLowerCase().includes(value.toLowerCase());
+    }));
+  } else {
     clearList();
-})
+  }
+});
 
-function renderList(results){
-    for(const book of results){
-        const resultItem = document.createElement('li');
-        resultItem.classList.add('result-item');
+// Handle search button click
+searchButton.addEventListener("click", (event) => {
+  event.preventDefault(); // Prevent form submission
+  let value = searchInput.value;
 
-        const text = document.createTextNode(book.name);
-        resultItem.appendChild(text);
-        renderList.appendChild(resultItem);
-    }
-    if (results.length === 0) {
-        noResults();
-    }
+  if (value.trim()) {
+    renderList(searchItems.filter(book => {
+      return book.name.toLowerCase().includes(value.toLowerCase());
+    }));
+  } else {
+    clearList();
+  }
+});
+
+// Handle clear button click
+clearButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  searchInput.value = ''; // Clear input field
+  clearList();
+});
+
+// Render the list of results
+function renderList(results) {
+  list.innerHTML = ''; // Clear previous results
+  for (const book of results) {
+    const resultItem = document.createElement('li');
+    resultItem.classList.add('result-item');
+
+    const text = document.createTextNode(book.name);
+    resultItem.appendChild(text);
+    list.appendChild(resultItem); // Append to list
+  }
+  if (results.length === 0) {
+    noResults();
+  }
 }
 
+// Clear the list
 function clearList() {
-    list.innerHTML = " ";
+  list.innerHTML = ""; // Clear the list
 }
 
-function noResults () {
-    const error = document.createElement(li);
-    error.classList.add('error-message');
+// Handle no results found
+function noResults() {
+  const error = document.createElement('li'); // 'li' as string
+  error.classList.add('error-message');
 
-    const text = document.createTextNode('No results found.');
-    error.append(text);
-    list.append(error);
+  const text = document.createTextNode('No results found.');
+  error.appendChild(text);
+  list.appendChild(error); // Append the error message to list
 }
