@@ -12,9 +12,11 @@ const searchInput = document.querySelector('.input');
 const searchButton = document.getElementById('searchButton');
 const clearButton = document.getElementById('clear');
 
-// Handle search input directly (typing)
-searchInput.addEventListener("input", (event) => {
-  let value = event.target.value;
+
+searchInput.addEventListener("input", (e) => {
+    e.preventDefault();
+    let value = e.target.value;
+
 
   if (value.trim()) {
     renderList(searchItems.filter(book => {
@@ -76,3 +78,4 @@ function noResults() {
   error.appendChild(text);
   list.appendChild(error); // Append the error message to list
 }
+
