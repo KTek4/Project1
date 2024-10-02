@@ -38,3 +38,13 @@ Staff: Austin Slater
             Brody Resick
 
             Devin Edwards (?)
+
+Delegation of tasks
+
+Christopher - Feature: Click on small image, image enlarges to more info like description and ability to add to cart
+
+Brody - Featured Products/ Best Sellers
+
+Thida - Nav Bar/Footer maybe
+
+Kalana - Search Bar/Advanced Gear icon
